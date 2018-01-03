@@ -33,17 +33,20 @@ namespace server.Controllers
         }
         
         [HttpPost]
-        public async Task<object> Login([FromBody] LoginDto model)
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
             
             if (result.Succeeded)
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return GenerateJwtToken(model.Email, appUser);
+                var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.UserName);
+                var tokenVal =  GenerateJwtToken(model.UserName, appUser);
+
+                return Ok(new { token = tokenVal });
             }
+            return StatusCode(500, new { error = "Username hoặc mật khẩu không đúng" } );
             
-            return Json(result);
+            // return Json(new { error = result.ToString() });
         }
        
         [HttpPost]
@@ -51,15 +54,15 @@ namespace server.Controllers
         {
             var user = new IdentityUser
             {
-                UserName = model.Email, 
-                Email = model.Email
+                UserName = model.UserName, 
+                // Email = model.Email
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return GenerateJwtToken(model.Email, user);
+                return GenerateJwtToken(model.UserName, user);
             }
             
             return Json(result.Errors);
@@ -74,11 +77,11 @@ namespace server.Controllers
             return "Protected area";
         }
 
-        private object GenerateJwtToken(string email, IdentityUser user)
+        private object GenerateJwtToken(string username, IdentityUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
@@ -101,7 +104,7 @@ namespace server.Controllers
         public class LoginDto
         {
             [Required]
-            public string Email { get; set; }
+            public string UserName { get; set; }
 
             [Required]
             public string Password { get; set; }
@@ -111,7 +114,7 @@ namespace server.Controllers
         public class RegisterDto
         {
             [Required]
-            public string Email { get; set; }
+            public string UserName { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "PASSWORD_MIN_LENGTH", MinimumLength = 6)]
