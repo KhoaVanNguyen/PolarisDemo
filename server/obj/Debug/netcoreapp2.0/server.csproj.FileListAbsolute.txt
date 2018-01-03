@@ -1,0 +1,10 @@
+/Users/khoa/Documents/DATA/Projects/Polaris/server/bin/Debug/netcoreapp2.0/server.deps.json
+/Users/khoa/Documents/DATA/Projects/Polaris/server/bin/Debug/netcoreapp2.0/server.runtimeconfig.json
+/Users/khoa/Documents/DATA/Projects/Polaris/server/bin/Debug/netcoreapp2.0/server.runtimeconfig.dev.json
+/Users/khoa/Documents/DATA/Projects/Polaris/server/bin/Debug/netcoreapp2.0/server.dll
+/Users/khoa/Documents/DATA/Projects/Polaris/server/bin/Debug/netcoreapp2.0/server.pdb
+/Users/khoa/Documents/DATA/Projects/Polaris/server/obj/Debug/netcoreapp2.0/server.csproj.CoreCompileInputs.cache
+/Users/khoa/Documents/DATA/Projects/Polaris/server/obj/Debug/netcoreapp2.0/server.AssemblyInfoInputs.cache
+/Users/khoa/Documents/DATA/Projects/Polaris/server/obj/Debug/netcoreapp2.0/server.AssemblyInfo.cs
+/Users/khoa/Documents/DATA/Projects/Polaris/server/obj/Debug/netcoreapp2.0/server.dll
+/Users/khoa/Documents/DATA/Projects/Polaris/server/obj/Debug/netcoreapp2.0/server.pdb
