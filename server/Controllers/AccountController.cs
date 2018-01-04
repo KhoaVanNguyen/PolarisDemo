@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -42,7 +43,9 @@ namespace server.Controllers
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.UserName);
                 var tokenVal =  GenerateJwtToken(model.UserName, appUser);
 
-                return Ok(new { token = tokenVal });
+                
+                
+                return Ok(new { token = tokenVal, userId = appUser.Id });
             }
             return StatusCode(500, new { error = "Username hoặc mật khẩu không đúng" } );
             
@@ -62,11 +65,12 @@ namespace server.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return GenerateJwtToken(model.UserName, user);
-            }
-            
-            return Json(result.Errors);
 
+                return Ok(new { token = GenerateJwtToken(model.UserName, user), userId = user.Id });
+                
+            }
+            return StatusCode(500, new { error = result.Errors.ToString() });
+            
             // throw new ApplicationException(result.Errors.ToString());
         }
 

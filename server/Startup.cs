@@ -33,6 +33,8 @@ namespace server
         public void ConfigureServices(IServiceCollection services)
         {
 
+            // run table creation here
+            
             // ===== Add our DbContext ========
             services.AddDbContext<ApplicationDbContext>();
             services.AddDbContext<AppDbContext>(ops => ops.UseMySql(connectionString: @"Server=localhost; Database=polarisdemo; Uid=root; Pwd=password"));
@@ -73,7 +75,10 @@ namespace server
             services.AddMvc()
   .AddJsonOptions(opts =>
   {
+      opts.SerializerSettings.DateFormatString = "dd/MM/yyyy";
       opts.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+    
+      
   });
         }
 

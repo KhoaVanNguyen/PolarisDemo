@@ -212,7 +212,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PE-mU-QZ8" customClass="FancyBtn" customModule="ClientApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PE-mU-QZ8">
                                 <rect key="frame" x="20" y="440" width="280" height="30"/>
                                 <color key="backgroundColor" red="0.52706045450000005" green="0.52994876059999996" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -229,6 +229,9 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="update_TouchUpInside:" destination="L4n-Xh-xES" eventType="touchUpInside" id="cbt-Hu-ttg"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J2F-TK-6zl">
                                 <rect key="frame" x="20" y="74" width="280" height="230"/>
@@ -401,6 +404,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GJc-Vh-8Ul"/>
                     </view>
+                    <connections>
+                        <outlet property="backImage" destination="QQf-hs-NU9" id="Wms-4T-667"/>
+                        <outlet property="birthdayBtn" destination="oTJ-R5-Bzx" id="cXH-aL-RJm"/>
+                        <outlet property="birthday_TouchUpInside" destination="oTJ-R5-Bzx" id="Qvc-N5-xwt"/>
+                        <outlet property="depositeTF" destination="hoh-em-0Xh" id="7R1-vp-vga"/>
+                        <outlet property="familyRegisterTF" destination="om8-SE-AgG" id="wOK-st-MVe"/>
+                        <outlet property="frontImage" destination="MBI-h9-ZtT" id="yZd-OQ-SAL"/>
+                        <outlet property="nameTF" destination="uuS-zX-Vk5" id="ZJA-k8-w7x"/>
+                        <outlet property="phoneTF" destination="TTy-Jw-0vs" id="LMY-2g-rHZ"/>
+                        <outlet property="updateBtn" destination="7PE-mU-QZ8" id="iFC-B8-czo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjl-zz-FhI" sceneMemberID="firstResponder"/>
             </objects>

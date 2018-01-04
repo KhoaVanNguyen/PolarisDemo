@@ -10,6 +10,16 @@ import UIKit
 
 class UpdateProfileVC: UIViewController {
 
+    @IBOutlet weak var nameTF: FancyTextField!
+    @IBOutlet weak var birthdayBtn: UIButton!
+    @IBOutlet weak var phoneTF: FancyTextField!
+    @IBOutlet weak var familyRegisterTF: FancyTextField!
+    
+    @IBOutlet weak var depositeTF: FancyTextField!
+    @IBOutlet weak var frontImage: UIImageView!
+    @IBOutlet weak var backImage: UIImageView!
+    @IBOutlet weak var updateBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +31,9 @@ class UpdateProfileVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func update_TouchUpInside(_ sender: Any) {
     }
-    */
-
+    
+    @IBOutlet weak var birthday_TouchUpInside: UIButton!
+    
 }
