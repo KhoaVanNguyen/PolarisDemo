@@ -156,7 +156,7 @@ class Api {
             "backDriverImage": backLicense,
             "userId": userId,
             ] as [String : Any]
-        print(params)
+//        print(params)
         Alamofire.request(addUrl, method: .put, parameters: params, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
             print(response)
             guard let data = response.data else {
