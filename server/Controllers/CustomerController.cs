@@ -60,9 +60,9 @@ namespace server.Controllers
             customerInDb.FrontDriverImage = customer.FrontDriverImage;
             customerInDb.BackDriverImage = customer.BackDriverImage;
 
-            db.SaveChangesAsync();
+            // db.SaveChangesAsync();
 
-            // db.SaveChanges();
+            db.SaveChanges(); 
             return StatusCode(200, new { customer = customerInDb, success = "Đã cập nhật khách hàng thành công" });
 
         }
