@@ -38,6 +38,9 @@ namespace server.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
             
+
+            
+
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.UserName);
@@ -51,6 +54,17 @@ namespace server.Controllers
             
             // return Json(new { error = result.ToString() });
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+            // return Json(new { error = result.ToString() });
+        }
+
+
        
         [HttpPost]
         public async Task<object> Register([FromBody] RegisterDto model)

@@ -19,6 +19,15 @@ class RegisterVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RegisterToUpdate" {
+            if let updateVC = segue.destination as? UpdateProfileVC {
+                updateVC.isRegistered = true
+            }
+        }
+    }
+    
     func showAlert(title: String, message : String){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -31,6 +40,7 @@ class RegisterVC: UIViewController {
         
     }
 
+    
 
     @IBAction func registerBtn(_ sender: Any) {
         

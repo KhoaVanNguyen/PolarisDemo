@@ -39,26 +39,26 @@ namespace server
             services.AddDbContext<ApplicationDbContext>();
 
             var connectionString = @"Server=localhost; Database=polarisdemo; Uid=root; Pwd=password";
-            // using (MySql.MySqlConnection conn = connectionString) {
-            //     conn.open();
-            //     MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(@"
-            //         create table customers (
-            //         Id  int AUTO_INCREMENT PRIMARY KEY,
-            //         Name varchar(50),
-            //         Phone varchar(11),
-            //         FamilyRegister varchar(200),
-            //         Birthday date,
-            //         Deposite int,
-            //         FrontDriverImage text,
-            //         BackDriverImage text,
-            //         UserId varchar(50),
-            //         foreign key (UserId) references AspNetUsers(Id)
-            //         );
-            //     ");
+            using (MySql.MySqlConnection conn = connectionString) {
+                conn.open();
+                MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(@"
+                    create table customers (
+                    Id  int AUTO_INCREMENT PRIMARY KEY,
+                    Name varchar(50),
+                    Phone varchar(11),
+                    FamilyRegister varchar(200),
+                    Birthday date,
+                    Deposite int,
+                    FrontDriverImage text,
+                    BackDriverImage text,
+                    UserId varchar(50),
+                    foreign key (UserId) references AspNetUsers(Id)
+                    );
+                ");
                 
-            //     MySql.MySqlDataReader rdr = cmd.ExecuteReader();
-            //     rdr.Close();
-            // }
+                MySql.MySqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Close();
+            }
 
             services.AddDbContext<AppDbContext>(ops => ops.UseMySql(connectionString: connectionString ));
             // services.AddDbContext<AppDbContext>();

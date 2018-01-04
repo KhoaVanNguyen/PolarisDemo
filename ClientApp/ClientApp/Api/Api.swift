@@ -17,8 +17,9 @@ class Api {
     
     static let shared = Api()
     var userId = ""
+    var token = ""
     let rootUrl = "http://localhost:5000"
-    let defaultHeader = [
+    var defaultHeader = [
         "Content-Type": "application/json; charset=utf-8",
         
     ]
@@ -49,6 +50,7 @@ class Api {
                     }else if statusCode == 200 {
                         completion(ActionResult.Success(dict["token"].stringValue) )
                         self.userId = dict["userId"].stringValue
+                        self.token = dict["token"].stringValue
                     }
                 }
                 break
@@ -59,15 +61,23 @@ class Api {
         }
     }
     
+    func logout() {
+        
+        let url = "\(rootUrl)/account/logout"
+       
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: defaultHeader).response { (response) in
+            self.token = ""
+            self.userId = ""
+        }
+    }
+    
     func login(username: String, password: String, completion: @escaping CompletionHandler) {
         
         let loginUrl = "\(rootUrl)/account/login"
         let params = [
             "username": username,
             "password": password
-        ] as [String:String]
-        
-        
+            ] as [String:String]
         Alamofire.request(loginUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
             guard let data = response.data else {
                 completion(ActionResult.Failure("Lỗi dữ liệu từ server"))
@@ -85,6 +95,7 @@ class Api {
                     }else if statusCode == 200 {
                         completion(ActionResult.Success(dict["token"].stringValue) )
                         self.userId = dict["userId"].stringValue
+                        self.token = dict["token"].stringValue
                     }
                 }
                 break
@@ -96,8 +107,42 @@ class Api {
     }
     
     
+    func getCustomerById(completion: @escaping CompletionHandler) {
+        
+        let url = "\(rootUrl)/api/customers/ById/\(userId)"
+        
+        defaultHeader["Authorization"] = "Bearer \(token)"
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
+            guard let data = response.data else {
+                completion(ActionResult.Failure("Lỗi dữ liệu từ server"))
+                return
+            }
+            let dict = JSON(data: data)
+            
+            switch response.result {
+            case .success(_):
+                
+                if let response = response.response {
+                    let statusCode = response.statusCode
+                    if statusCode == 500 {
+                        completion(ActionResult.Failure(dict["error"].stringValue))
+                    }else if statusCode == 200 {
+                        let customer = Customer(data: dict["customer"])
+                        completion(ActionResult.Success(customer))
+                    }
+                }
+                break
+            case .failure(_):
+                completion(ActionResult.Failure(self.disconnectErrMessage))
+                break
+            }
+        }
+    }
+    
     func updateCustomer(name: String, phone: String, birthday: String, familyRegister: String, deposite: String, frontLicense: String, backLicense: String,completion: @escaping CompletionHandler  ) {
         
+        defaultHeader["Authorization"] = "Bearer \(token)"
         let addUrl = "\(rootUrl)/api/customers/update"
         
         let params = [
@@ -138,14 +183,5 @@ class Api {
             }
         }
     }
-
-//
-//    func updateCustomer(name: String, phone: String, birthday: String, familyRegister: String, deposite: Int, frontLicense: String, backLicense: String,completion: @escaping CompletionHandler  ) {
-//
-//    }
-    
-    
-    
-    
     
 }

@@ -72,6 +72,11 @@ class LoginVC: UIViewController {
         super.viewDidAppear(animated)
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        usernameTF.text = ""
+        passwordTF.text = ""
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

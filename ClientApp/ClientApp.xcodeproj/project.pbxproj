@@ -26,6 +26,7 @@
 		D2F0C54A1FFDE78F00950772 /* DatePickerPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F0C5481FFDE78E00950772 /* DatePickerPopup.xib */; };
 		D2F0C54B1FFDE78F00950772 /* DatePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C5491FFDE78E00950772 /* DatePickerPopup.swift */; };
 		D2F0C54D1FFDE93100950772 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C54C1FFDE93100950772 /* HelperFunctions.swift */; };
+		D2F0C54F1FFE072600950772 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C54E1FFE072600950772 /* Customer.swift */; };
 		D72AF8CEAE7379244B7E334B /* Pods_ClientApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DA2E49A5C51655852A3062 /* Pods_ClientApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		D2F0C5481FFDE78E00950772 /* DatePickerPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerPopup.xib; sourceTree = "<group>"; };
 		D2F0C5491FFDE78E00950772 /* DatePickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerPopup.swift; sourceTree = "<group>"; };
 		D2F0C54C1FFDE93100950772 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		D2F0C54E1FFE072600950772 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		E096D52E5D57E82CB27E53B0 /* Pods_ClientAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClientAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1B04B8D597EB8F9F648FFB /* Pods_ClientAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClientAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -204,6 +206,7 @@
 		D2C127A11FFD0C7A006DDC3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D2F0C54E1FFE072600950772 /* Customer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				D2F0C54B1FFDE78F00950772 /* DatePickerPopup.swift in Sources */,
 				D2C127A51FFD0D31006DDC3A /* CheckBox.swift in Sources */,
 				D2C127AF1FFD2B29006DDC3A /* RegisterVC.swift in Sources */,
+				D2F0C54F1FFE072600950772 /* Customer.swift in Sources */,
 				D2C127A31FFD0C96006DDC3A /* FancyTextField.swift in Sources */,
 				D2C127751FFD0BF1006DDC3A /* ViewController.swift in Sources */,
 				D2C127AA1FFD11C7006DDC3A /* UpdateProfileVC.swift in Sources */,

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientApp/Api/Api.swift"
-            timestampString = "536738550.161089"
+            timestampString = "536743952.02712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "register(username:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,13 +26,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientApp/Api/Api.swift"
-            timestampString = "536738550.161559"
+            timestampString = "536743952.027271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "register(username:password:completion:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClientApp/Api/Api.swift"
+            timestampString = "536743952.027516"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "login(username:password:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ClientApp.Api.getCustomerById(completion: (ClientApp.ActionResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ClientApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Projects/Polaris/ClientApp/ClientApp/Api/Api.swift"
+                  timestampString = "536742320.972617"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "678">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in ClientApp.Api.getCustomerById(completion: (ClientApp.ActionResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ClientApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Projects/Polaris/ClientApp/ClientApp/Api/Api.swift"
+                  timestampString = "536742320.975516"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 extension Date {
     
     func sharedCalendar(){
@@ -186,4 +187,9 @@ func formatDayAndMonth(date: Date) -> String{
     }
     return "\(newDay)/\(newMonth)/\(year)"
     
+}
+func getImageFrom(base64Encode strBase64: String) -> UIImage?{
+    let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
+    let decodedimage = UIImage(data: dataDecoded)
+    return decodedimage
 }

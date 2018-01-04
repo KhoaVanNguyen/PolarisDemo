@@ -23,13 +23,71 @@ class UpdateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     var isFront = true
     var picker: UIImagePickerController!
     let defaultBirthdayTitle = "Ngày sinh"
+    
+    var isRegistered = false
+    
+    
+ 
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
+        loadCustomerData()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
+    }
+    func back(sender: UIBarButtonItem) {
+      
+        Api.shared.logout()
+        if isRegistered {
+            _ = navigationController?.popToRootViewController(animated: true)
+            
+        }else {
+            _ = navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
+    func loadCustomerData(){
+        if isRegistered {
+            return
+        }
+        ProgressHUD.show("Loading...")
+        Api.shared.getCustomerById { (completion) in
+            ProgressHUD.dismiss()
+            switch completion {
+            case .Success(let value):
+                if let customer = value as? Customer {
+                    self.nameTF.text = customer.name
+                    self.phoneTF.text = customer.phone
+                    self.birthdayBtn.setTitle(customer.birthday, for: .normal)
+                    self.familyRegisterTF.text = customer.familyRegister
+                    self.depositeTF.text = String(customer.deposite)
+                    if let img = getImageFrom(base64Encode: customer.frontDriverImage) {
+                        self.frontImage.image = img
+                    }
+                    if let img = getImageFrom(base64Encode: customer.backDriverImage) {
+                        self.backImage.image = img
+                    }
+                    
+                }
+                
+                break
+            case .Failure(let value):
+                self.showAlert(title: "Error", message: value as! String )
+                break
+            }
+        }
+    }
+    
+    func setupUI(){
         picker = UIImagePickerController()
         picker.allowsEditing = false
         picker.delegate = self
-
+        
         let frontTap = UITapGestureRecognizer(target: self, action: #selector(self.frontImageTapped))
         frontImage.isUserInteractionEnabled = true
         frontImage.addGestureRecognizer(frontTap)
@@ -39,9 +97,9 @@ class UpdateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         backImage.addGestureRecognizer(backTap)
         
         birthdayBtn.setTitle(defaultBirthdayTitle, for: .normal)
-        // Do any additional setup after loading the view.
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -76,10 +134,10 @@ class UpdateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @IBAction func update_TouchUpInside(_ sender: Any) {
         
-        nameTF.text = "Nguyen Van C"
-        phoneTF.text = "012831293"
-        depositeTF.text = "13232"
-        familyRegisterTF.text = "Ho Chi Minh"
+//        nameTF.text = "Nguyen Van C"
+//        phoneTF.text = "012831293"
+//        depositeTF.text = "13232"
+//        familyRegisterTF.text = "Ho Chi Minh"
         guard let name = nameTF.text, name != "" else {
             showAlert(title: "Lỗi", message: "Tên không được để trống")
             return
