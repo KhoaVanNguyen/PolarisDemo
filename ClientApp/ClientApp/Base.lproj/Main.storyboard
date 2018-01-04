@@ -160,7 +160,7 @@
                                     <color key="titleColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="L4n-Xh-xES" kind="show" identifier="LoginToUpdate" id="dIj-Rx-pze"/>
+                                    <segue destination="JX7-KZ-eie" kind="show" id="DlZ-W0-ezB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -194,6 +194,7 @@
                         <outlet property="passwordTF" destination="pEo-CV-hej" id="mAr-pL-prO"/>
                         <outlet property="showPasswordCheckBox" destination="ZaA-g3-P2Y" id="qfe-pW-f89"/>
                         <outlet property="usernameTF" destination="CAI-8B-D06" id="Tlf-SD-Tti"/>
+                        <segue destination="L4n-Xh-xES" kind="show" identifier="LoginToUpdate" id="S0m-Sr-8s4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iw-lk-ARt" sceneMemberID="firstResponder"/>
@@ -264,6 +265,9 @@
                                         <state key="normal" title="Ngày sinh">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="birthday_TouchUpInside:" destination="L4n-Xh-xES" eventType="touchUpInside" id="9r6-Ja-S83"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Điện thoại" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TTy-Jw-0vs" customClass="FancyTextField" customModule="ClientApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="280" height="40"/>
@@ -274,7 +278,7 @@
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="20"/>
@@ -296,7 +300,7 @@
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="20"/>
@@ -318,7 +322,7 @@
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="20"/>
@@ -407,7 +411,6 @@
                     <connections>
                         <outlet property="backImage" destination="QQf-hs-NU9" id="Wms-4T-667"/>
                         <outlet property="birthdayBtn" destination="oTJ-R5-Bzx" id="cXH-aL-RJm"/>
-                        <outlet property="birthday_TouchUpInside" destination="oTJ-R5-Bzx" id="Qvc-N5-xwt"/>
                         <outlet property="depositeTF" destination="hoh-em-0Xh" id="7R1-vp-vga"/>
                         <outlet property="familyRegisterTF" destination="om8-SE-AgG" id="wOK-st-MVe"/>
                         <outlet property="frontImage" destination="MBI-h9-ZtT" id="yZd-OQ-SAL"/>
@@ -549,7 +552,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="checkedImage" value="check-box"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="showPassword_TouchUpInside:" destination="JX7-KZ-eie" eventType="touchUpInside" id="LR6-fS-tUt"/>
+                                            <action selector="showPassword_TouchUpInside:" destination="JX7-KZ-eie" eventType="touchUpInside" id="RW7-L1-2eQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -557,13 +560,13 @@
                                     <constraint firstAttribute="height" constant="130" id="yBV-wi-SPg"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ql7-j3-mPw" customClass="FancyBtn" customModule="ClientApp" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ql7-j3-mPw">
                                 <rect key="frame" x="20" y="330" width="280" height="40"/>
                                 <color key="backgroundColor" red="0.52706045450000005" green="0.52994876059999996" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Ss-0t-TIN"/>
                                 </constraints>
-                                <state key="normal" title="ĐĂNG NHẬP">
+                                <state key="normal" title="ĐĂNG KÝ">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -575,25 +578,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="login_TouchUpInside:" destination="JX7-KZ-eie" eventType="touchUpInside" id="KBC-ns-MjE"/>
+                                    <action selector="registerBtn:" destination="JX7-KZ-eie" eventType="touchUpInside" id="xQ3-Sf-0pA"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pE6-zh-re1">
-                                <rect key="frame" x="20" y="385" width="280" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="c9K-Rw-Uy3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Đăng ký">
-                                    <color key="titleColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LBf-HG-23k" firstAttribute="top" secondItem="4sG-fU-6IY" secondAttribute="bottom" constant="15" id="3v0-xk-UtL"/>
                             <constraint firstItem="yvg-xB-cwZ" firstAttribute="centerX" secondItem="8AE-0h-reS" secondAttribute="centerX" id="49w-bH-gGS"/>
-                            <constraint firstItem="pE6-zh-re1" firstAttribute="top" secondItem="ql7-j3-mPw" secondAttribute="bottom" constant="15" id="4IB-qr-ySD"/>
                             <constraint firstAttribute="trailing" secondItem="yvg-xB-cwZ" secondAttribute="trailing" constant="20" id="59u-YS-t8w"/>
                             <constraint firstItem="ql7-j3-mPw" firstAttribute="top" secondItem="LBf-HG-23k" secondAttribute="bottom" constant="15" id="7oD-Ek-W5I"/>
                             <constraint firstItem="yvg-xB-cwZ" firstAttribute="leading" secondItem="8AE-0h-reS" secondAttribute="leading" constant="20" id="GCd-0P-vkz"/>
@@ -609,16 +601,15 @@
                             <constraint firstItem="oHd-mG-nXl" firstAttribute="leading" secondItem="8AE-0h-reS" secondAttribute="leading" id="qMx-OG-Eg8"/>
                             <constraint firstAttribute="trailing" secondItem="ql7-j3-mPw" secondAttribute="trailing" constant="20" id="qvW-Cy-RQf"/>
                             <constraint firstItem="ql7-j3-mPw" firstAttribute="leading" secondItem="8AE-0h-reS" secondAttribute="leading" constant="20" id="xk1-EQ-IXn"/>
-                            <constraint firstAttribute="trailing" secondItem="pE6-zh-re1" secondAttribute="trailing" constant="20" id="yDf-o7-QXF"/>
-                            <constraint firstItem="pE6-zh-re1" firstAttribute="leading" secondItem="8AE-0h-reS" secondAttribute="leading" constant="20" id="zVx-4O-Mvy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dzp-Jo-Tj1"/>
                     </view>
                     <navigationItem key="navigationItem" id="tch-To-o7I"/>
                     <connections>
-                        <outlet property="passwordTF" destination="PsI-lO-Qex" id="bzh-k8-Yvm"/>
-                        <outlet property="showPasswordCheckBox" destination="rrl-qY-MEe" id="B7l-0H-MGq"/>
-                        <outlet property="usernameTF" destination="m6m-RA-QJs" id="YgJ-et-ddX"/>
+                        <outlet property="passwordTF" destination="PsI-lO-Qex" id="PDJ-w9-FUQ"/>
+                        <outlet property="showPasswordCheckBox" destination="rrl-qY-MEe" id="quv-9S-8ep"/>
+                        <outlet property="usernameTF" destination="m6m-RA-QJs" id="1Q5-td-wOe"/>
+                        <segue destination="L4n-Xh-xES" kind="show" identifier="RegisterToUpdate" id="faP-ha-OKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M1R-QK-fbb" sceneMemberID="firstResponder"/>
@@ -634,4 +625,7 @@
         <image name="user" width="32" height="32"/>
         <image name="viettel" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="S0m-Sr-8s4"/>
+    </inferredMetricsTieBreakers>
 </document>

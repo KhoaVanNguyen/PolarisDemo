@@ -13,6 +13,8 @@ import Alamofire
 typealias CompletionHandler =  (ActionResult<Any>) -> Void
 class Api {
     
+    let disconnectErrMessage = "Không thể kết nối đến server"
+    
     static let shared = Api()
     var userId = ""
     let rootUrl = "http://localhost:5000"
@@ -20,6 +22,42 @@ class Api {
         "Content-Type": "application/json; charset=utf-8",
         
     ]
+    
+    func register(username: String, password: String, completion: @escaping CompletionHandler) {
+        
+        let registerUrl = "\(rootUrl)/account/register"
+        let params = [
+            "username": username,
+            "password": password
+            ] as [String:String]
+        
+        
+        Alamofire.request(registerUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
+            guard let data = response.data else {
+                completion(ActionResult.Failure("Lỗi dữ liệu từ server"))
+                return
+            }
+            let dict = JSON(data: data)
+            
+            switch response.result {
+            case .success(_):
+                
+                if let response = response.response {
+                    let statusCode = response.statusCode
+                    if statusCode == 500 {
+                        completion(ActionResult.Failure(dict["error"].stringValue))
+                    }else if statusCode == 200 {
+                        completion(ActionResult.Success(dict["token"].stringValue) )
+                        self.userId = dict["userId"].stringValue
+                    }
+                }
+                break
+            case .failure(_):
+                completion(ActionResult.Failure(self.disconnectErrMessage))
+                break
+            }
+        }
+    }
     
     func login(username: String, password: String, completion: @escaping CompletionHandler) {
         
@@ -51,16 +89,16 @@ class Api {
                 }
                 break
             case .failure(_):
-                completion(ActionResult.Failure(dict["error"].stringValue))
+                completion(ActionResult.Failure(self.disconnectErrMessage))
                 break
             }
         }
     }
     
     
-    func updateCustomer(name: String, phone: String, birthday: String, familyRegister: String, deposite: Int, frontLicense: String, backLicense: String,completion: @escaping CompletionHandler  ) {
+    func updateCustomer(name: String, phone: String, birthday: String, familyRegister: String, deposite: String, frontLicense: String, backLicense: String,completion: @escaping CompletionHandler  ) {
         
-        let addUrl = "\(rootUrl)/customer/update"
+        let addUrl = "\(rootUrl)/api/customers/update"
         
         let params = [
         
@@ -71,10 +109,11 @@ class Api {
             "deposite": deposite,
             "frontDriverImage": frontLicense,
             "backDriverImage": backLicense,
-            "userId": userId
+            "userId": userId,
             ] as [String : Any]
-        
-        Alamofire.request(addUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
+        print(params)
+        Alamofire.request(addUrl, method: .put, parameters: params, encoding: JSONEncoding.default, headers: defaultHeader).responseJSON { (response) in
+            print(response)
             guard let data = response.data else {
                 completion(ActionResult.Failure("Lỗi dữ liệu từ server"))
                 return
@@ -88,14 +127,13 @@ class Api {
                     let statusCode = response.statusCode
                     if statusCode == 500 {
                         completion(ActionResult.Failure(dict["error"].stringValue))
-                    }else if statusCode == 201 {
-                        completion(ActionResult.Success(dict["token"].stringValue) )
-                        self.userId = dict["userId"].stringValue
+                    }else if statusCode == 201 || statusCode == 200 {
+                        completion(ActionResult.Success(dict["success"].stringValue) )
                     }
                 }
                 break
             case .failure(_):
-                completion(ActionResult.Failure(dict["error"].stringValue))
+                completion(ActionResult.Failure(self.disconnectErrMessage))
                 break
             }
         }

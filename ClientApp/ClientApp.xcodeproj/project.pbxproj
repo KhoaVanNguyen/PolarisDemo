@@ -23,6 +23,9 @@
 		D2C127AD1FFD1B14006DDC3A /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C127AC1FFD1B14006DDC3A /* Api.swift */; };
 		D2C127AF1FFD2B29006DDC3A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C127AE1FFD2B29006DDC3A /* RegisterVC.swift */; };
 		D2C127B11FFD3F8F006DDC3A /* ActionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C127B01FFD3F8F006DDC3A /* ActionResult.swift */; };
+		D2F0C54A1FFDE78F00950772 /* DatePickerPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F0C5481FFDE78E00950772 /* DatePickerPopup.xib */; };
+		D2F0C54B1FFDE78F00950772 /* DatePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C5491FFDE78E00950772 /* DatePickerPopup.swift */; };
+		D2F0C54D1FFDE93100950772 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C54C1FFDE93100950772 /* HelperFunctions.swift */; };
 		D72AF8CEAE7379244B7E334B /* Pods_ClientApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DA2E49A5C51655852A3062 /* Pods_ClientApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,9 @@
 		D2C127AC1FFD1B14006DDC3A /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		D2C127AE1FFD2B29006DDC3A /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D2C127B01FFD3F8F006DDC3A /* ActionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionResult.swift; sourceTree = "<group>"; };
+		D2F0C5481FFDE78E00950772 /* DatePickerPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerPopup.xib; sourceTree = "<group>"; };
+		D2F0C5491FFDE78E00950772 /* DatePickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerPopup.swift; sourceTree = "<group>"; };
+		D2F0C54C1FFDE93100950772 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		E096D52E5D57E82CB27E53B0 /* Pods_ClientAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClientAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1B04B8D597EB8F9F648FFB /* Pods_ClientAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClientAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -187,6 +193,8 @@
 		D2C127A01FFD0C6D006DDC3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D2F0C5491FFDE78E00950772 /* DatePickerPopup.swift */,
+				D2F0C5481FFDE78E00950772 /* DatePickerPopup.xib */,
 				D2C127A21FFD0C96006DDC3A /* FancyTextField.swift */,
 				D2C127A41FFD0D31006DDC3A /* CheckBox.swift */,
 			);
@@ -214,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C127AC1FFD1B14006DDC3A /* Api.swift */,
+				D2F0C54C1FFDE93100950772 /* HelperFunctions.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -334,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F0C54A1FFDE78F00950772 /* DatePickerPopup.xib in Resources */,
 				D2C1277D1FFD0BF1006DDC3A /* LaunchScreen.storyboard in Resources */,
 				D2C1277A1FFD0BF1006DDC3A /* Assets.xcassets in Resources */,
 				D2C127781FFD0BF1006DDC3A /* Main.storyboard in Resources */,
@@ -515,6 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F0C54B1FFDE78F00950772 /* DatePickerPopup.swift in Sources */,
 				D2C127A51FFD0D31006DDC3A /* CheckBox.swift in Sources */,
 				D2C127AF1FFD2B29006DDC3A /* RegisterVC.swift in Sources */,
 				D2C127A31FFD0C96006DDC3A /* FancyTextField.swift in Sources */,
@@ -523,6 +534,7 @@
 				D2C127731FFD0BF1006DDC3A /* AppDelegate.swift in Sources */,
 				D2C127AD1FFD1B14006DDC3A /* Api.swift in Sources */,
 				D2C127B11FFD3F8F006DDC3A /* ActionResult.swift in Sources */,
+				D2F0C54D1FFDE93100950772 /* HelperFunctions.swift in Sources */,
 				D2C127A81FFD0E5F006DDC3A /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,7 +708,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khoanguyen.ClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -712,7 +724,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khoanguyen.ClientApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

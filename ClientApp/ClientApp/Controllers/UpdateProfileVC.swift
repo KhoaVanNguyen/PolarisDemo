@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
-class UpdateProfileVC: UIViewController {
+import Foundation
+import ProgressHUD
+class UpdateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     @IBOutlet weak var nameTF: FancyTextField!
     @IBOutlet weak var birthdayBtn: UIButton!
@@ -19,10 +20,25 @@ class UpdateProfileVC: UIViewController {
     @IBOutlet weak var frontImage: UIImageView!
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var updateBtn: UIButton!
-    
+    var isFront = true
+    var picker: UIImagePickerController!
+    let defaultBirthdayTitle = "Ngày sinh"
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        picker = UIImagePickerController()
+        picker.allowsEditing = false
+        picker.delegate = self
+
+        let frontTap = UITapGestureRecognizer(target: self, action: #selector(self.frontImageTapped))
+        frontImage.isUserInteractionEnabled = true
+        frontImage.addGestureRecognizer(frontTap)
+        
+        let backTap = UITapGestureRecognizer(target: self, action: #selector(self.backImageTapped))
+        backImage.isUserInteractionEnabled = true
+        backImage.addGestureRecognizer(backTap)
+        
+        birthdayBtn.setTitle(defaultBirthdayTitle, for: .normal)
         // Do any additional setup after loading the view.
     }
 
@@ -31,9 +47,154 @@ class UpdateProfileVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func update_TouchUpInside(_ sender: Any) {
+    func frontImageTapped() {
+        isFront = true
+        present(picker, animated: true, completion: nil)
+    }
+    func backImageTapped() {
+        isFront = false
+        present(picker, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var birthday_TouchUpInside: UIButton!
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if isFront {
+                frontImage.image = img
+            }else {
+                backImage.image = img
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func update_TouchUpInside(_ sender: Any) {
+        
+        nameTF.text = "Nguyen Van C"
+        phoneTF.text = "012831293"
+        depositeTF.text = "13232"
+        familyRegisterTF.text = "Ho Chi Minh"
+        guard let name = nameTF.text, name != "" else {
+            showAlert(title: "Lỗi", message: "Tên không được để trống")
+            return
+        }
+        guard let phone = phoneTF.text, phone != "" else {
+            showAlert(title: "Lỗi", message: "Số điện thoại không được để trống")
+            return
+        }
+        guard birthdayBtn.currentTitle! != defaultBirthdayTitle  else {
+            showAlert(title: "Lỗi", message: "Bạn chưa chọn ngày sinh")
+            return
+        }
+        guard let familyRegister = familyRegisterTF.text, familyRegister != "" else {
+            showAlert(title: "Lỗi", message: "Hộ khẩu không được để trống")
+            return
+        }
+        guard let deposite = depositeTF.text else {
+            showAlert(title: "Lỗi", message: "Tiền đặt cọc không được để trống")
+            return
+        }
+        
+        guard frontImage.image != nil else {
+            showAlert(title: "Lỗi", message: "Bạn chưa chọn hình mặt trước bằng lái")
+            return
+        }
+        guard backImage.image != nil else {
+            showAlert(title: "Lỗi", message: "Bạn chưa chọn hình mặt sau bằng lái")
+            return
+        }
+        
+        ProgressHUD.show("Đang nén hình ảnh")
+        let birthday = birthdayBtn.currentTitle!
+        compressImage { (frontImg, backImg) in
+            Api.shared.updateCustomer(name: name, phone: phone, birthday: birthday, familyRegister: familyRegister, deposite: deposite, frontLicense: frontImg, backLicense: backImg) { (completion) in
+                ProgressHUD.dismiss()
+                switch completion {
+                case .Success(let value):
+                    self.showAlert(title: "App", message: value as! String)
+                    break
+                case .Failure(let value):
+                    self.showAlert(title: "Error", message: value as! String )
+                    break
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    func compressImage( completion: @escaping (String,String) -> Void  ) {
+        
+        let jpegCompressionQuality: CGFloat = 0.5
+        
+        let frontImage = self.frontImage.image!
+        let backImage = self.backImage.image!
+        DispatchQueue.global().async {
+            guard let base64StringFront = UIImageJPEGRepresentation(frontImage, jpegCompressionQuality)?.base64EncodedString() else {
+//                showAlert(title: "Lỗi", message: "Có lỗi trong quá trình xử lý ảnh")
+                return
+            }
+            guard let base64StringBack = UIImageJPEGRepresentation(backImage, jpegCompressionQuality)?.base64EncodedString() else {
+//                showAlert(title: "Lỗi", message: "Có lỗi trong quá trình xử lý ảnh")
+                return
+            }
+            ProgressHUD.show("Nén hình ảnh xong")
+            ProgressHUD.show("Cập nhật dữ liệu")
+            completion(base64StringFront, base64StringBack)
+            
+        }
+        
+       
+        
+    }
+    
+    
+    @IBAction func birthday_TouchUpInside(_ sender: Any) {
+        
+        let datePickerPopup = DatePickerPopup()
+        datePickerPopup.dateString = birthdayBtn.currentTitle!
+        datePickerPopup.delegate = self
+        datePickerPopup.modalPresentationStyle = .custom
+        present(datePickerPopup, animated: true, completion: nil)
+        
+    }
+   
+    func showAlert(title: String, message : String){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+
 }
+
+extension UpdateProfileVC: DatePickerPopupDelegate {
+    func didSelect(withDate date: Date) {
+        
+            let dateString = formatDayAndMonth(date: date)
+            let today = Date().addingTimeInterval(1)
+            if date > today {
+                
+                showAlert(title: "Lỗi", message: "Ngày được chọn phải nhỏ hơn ngày hiện tại")
+                
+            }else {
+                birthdayBtn.setTitle(dateString, for: .normal)
+            }
+        
+        
+    }
+}
+
